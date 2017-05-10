@@ -1,5 +1,5 @@
 module Ark
-  class WindowsOwner
+  class GeneralOwner
     def initialize(resource)
       @resource = resource
     end
@@ -7,7 +7,7 @@ module Ark
     attr_reader :resource
 
     def command
-      "#{ENV.fetch('SystemRoot')}\\System32\\icacls \"#{resource.path}\\*\" /setowner \"#{resource.owner}\""
+      "chown -R #{resource.owner}:#{resource.group} #{resource.path}"
     end
   end
 end
